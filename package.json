@@ -1,0 +1,33 @@
+{
+  "name": "jst",
+  "description": "Plain-text template engine with JavaScript support",
+  "title": "JST",
+  "version": "0.0.3",
+  "homepage": "https://github.com/Monwara/jst",
+  "keywords": ["template", "view"],
+  "author": "Monwara LLC <branko@monwara.com>",
+  "maintainers": [
+    {
+      "name": "Branko Vukelic",
+      "email": "branko@monwara.com"
+    }
+  ],
+  "main": "jst.js",
+  "bugs": {
+    "mail": "branko@monwara.com",
+    "url": "https://github.com/Monwara/jst/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Monwara/jst.git"
+  },
+  "engines": {
+    "node": ">= 0.4.1"
+  },
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/Monwara/node-logging/raw/master/LICENSE"
+  }]
+}
+
+
