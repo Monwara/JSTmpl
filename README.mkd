@@ -1,0 +1,108 @@
+# JST - JavaScript Templates
+
+Plain-text template engine with JavaScript support.
+
+Adapted from [underscore.js](https://github.com/documentcloud/underscrore/).
+Forked from: bfa4fe8a4f / November 23, 2011 
+
+
+## Overview
+
+JST started off as a simple project of shamelessly ripping out
+underscore.js' template functionality and converting it into an AMD module
+for use in frontends. Since then, quite a few things have changed, and
+functionality of the template engine has been somewhat expanded.
+
+JST now supports a handful of useful helper functions that makes combining
+JavaScript with your template much easier, and ads performance improvements
+like in-memory cache.
+
+The JST module itself has been converted to UMD format so it can be used
+both server- and client-side.
+
+## TAGS
+
+Variable holding all enclosable tags
+
+## jst.html
+
+HTML-related helper methods.
+
+Following tags are supported: p, a, strong, em, button, code, pre, 
+blockquote, div, li, dd, dt, td, th, tr, h1, h2, h3, h4, h5, h6, and tt.
+
+The b and i tags are aliases for strong and em respectively.
+
+You can convert a sring into a tagged string by calling a method named
+after the tag:
+
+   jst.html.p('This is a paragraph');
+   // results in '<p>This is a paragraph</p>'
+
+You can also use arbitrary attributes:
+
+   jqx.html.a('click here', {href: 'http://example.com'});
+   // results in '<a href="http://example.com">click here</a>'
+
+All HTML helper methods are available inside templates as well, prefixed
+by `g.h.`. For example `jst.html.a()` will be `g.h.a()` within 
+the templates.
+
+Other helper methods are documented in their own sections.
+
+### jst.html.enclose(s, t, attr)
+
+Enclose in HTML tags. `s` is the string to be enclosed in tags. `t` is the
+tag name, and `attr` is an object containing key-value mappings of HTML
+attributes.
+
+
+### jst.html.select(opts, attrs)
+
+Creates `<option>` elements for a select input and wraps them in
+`<select>` tags.
+
+array of label which would be also used as values.
+
+### jst.html.escape(s)
+
+Escapes HTML tags and special characters in string `s`.
+
+
+## jst.url
+
+URL-related helper methods.
+
+### jst.url.toQuery(parameters)
+
+Converts a key-value pair of parameters into an URL query string. The
+resulting string does not include the leading question mark `?`.
+
+It is assumed that keys are valid, and require no special treatment.
+
+
+## jst.settings
+
+Main template settings. Following are used:
+
+ + evaluate: Regexp for evaluate tag (default matches `<% %>`)
+ + interpolate: Regexp for interpolate tag (default matches `<%= %>`)
+ + escape: Regexp for escape tag (default matches `<%- %>`)
+ + debug: Flag that enables debugging messages in the templates
+ + globals: Object which will be available inside the object as `g`. You 
+   can use it to make anything available to the template.
+
+
+## jst.render(str, [data, settings])
+
+Renders the template contained in `str` using `data`. `settings` can be
+passed to override global settings.
+
+If `data` is omitted, a function is returned which can be used to render
+the template by specifying only the data, at some later time. If `data` is
+just `true`, the template function is returned as a string instead of the
+rendered template.
+
+Passing `true` instead of the data can be a useful debugging tool.
+
+
