@@ -1,5 +1,5 @@
 /**
- * # JST - JavaScript Templates
+ * # JSTmpl - JavaScript Templates
  *
  * Plain-text template engine with JavaScript support.
  *
@@ -13,16 +13,16 @@
 /**
  * ## Overview
  * 
- * JST started off as a simple project of shamelessly ripping out
+ * JSTmpl started off as a simple project of shamelessly ripping out
  * underscore.js' template functionality and converting it into an AMD module
  * for use in frontends. Since then, quite a few things have changed, and
  * functionality of the template engine has been somewhat expanded.
  *
- * JST now supports a handful of useful helper functions that makes combining
+ * JSTmpl now supports a handful of useful helper functions that makes combining
  * JavaScript with your template much easier, and ads performance improvements
  * like in-memory cache.
  *
- * The JST module itself has been converted to UMD format so it can be used
+ * The JSTmpl module itself has been converted to UMD format so it can be used
  * both server- and client-side.
  */
 (function(root, factory) {
@@ -31,11 +31,11 @@
   } else if (typeof module === 'object' && module.exports) {
     module.exports = factory();
   } else {
-    root.jst = factory();
+    root.jstmpl = factory();
   }
 })(this, function() {
 
-  var jst = {};
+  var jstmpl = {};
 
   var cache = {};
 
@@ -48,7 +48,7 @@
               'tr h1 h2 h3 h4 h5 h6 tt').split(' ');
 
   /**
-   * ## jst.html
+   * ## jstmplmpl.html
    *
    * HTML-related helper methods.
    *
@@ -60,7 +60,7 @@
    * You can convert a sring into a tagged string by calling a method named
    * after the tag:
    *
-   *    jst.html.p('This is a paragraph');
+   *    jstmpl.html.p('This is a paragraph');
    *    // results in '<p>This is a paragraph</p>'
    *
    * You can also use arbitrary attributes:
@@ -69,15 +69,15 @@
    *    // results in '<a href="http://example.com">click here</a>'
    *
    * All HTML helper methods are available inside templates as well, prefixed
-   * by `g.h.`. For example `jst.html.a()` will be `g.h.a()` within 
+   * by `g.h.`. For example `jstmpl.html.a()` will be `g.h.a()` within 
    * the templates.
    *
    * Other helper methods are documented in their own sections.
    */
-  jst.html = {};
+  jstmpl.html = {};
 
   /**
-   * ### jst.html.enclose(s, t, attr)
+   * ### jstmpl.html.enclose(s, t, attr)
    *
    * Enclose in HTML tags. `s` is the string to be enclosed in tags. `t` is the
    * tag name, and `attr` is an object containing key-value mappings of HTML
@@ -88,7 +88,7 @@
    * @param {Object} attr Optional attribute-value mapping
    * @return {String} String enclosed in proper HTML
    */
-  jst.html.enclose = function(s, t, attr) {
+  jstmpl.html.enclose = function(s, t, attr) {
     var r = '<' + t;
     if (typeof attr === 'object') {
       for (k in attr) { r += ' ' + k + '="' + attr[k].toString() + '"'; }
@@ -96,19 +96,19 @@
     return r + '>' + s + '</' + t + '>';
   };
 
-  // Add all tags in TAGS to `jst.html` object
+  // Add all tags in TAGS to `jstmpl.html` object
   TAGS.forEach(function(t) {
-    jst.html[t] = function(s, attr) {
+    jstmpl.html[t] = function(s, attr) {
       return this.enclose(s, t, attr);
     };
   });
 
   // Alias b and i to strong and em respectively
-  jst.html.b = jst.html.strong;
-  jst.html.i = jst.html.em;
+  jstmpl.html.b = jstmpl.html.strong;
+  jstmpl.html.i = jstmpl.html.em;
 
   /**
-   * ### jst.html.select(opts, attrs)
+   * ### jstmpl.html.select(opts, attrs)
    *
    * Creates `<option>` elements for a select input and wraps them in
    * `<select>` tags.
@@ -117,7 +117,7 @@
    * array of label which would be also used as values.
    * @param {Object} attrs Attributes for select element
    */
-  jst.html.select = function(opts, attrs) {
+  jstmpl.html.select = function(opts, attrs) {
     var optHTML;
     if (Array.isArray(opts)) {
       optsHTML = opts.map(function(v, idx) {
@@ -132,14 +132,14 @@
   };
 
   /**
-   * ### jst.html.escape(s)
+   * ### jstmpl.html.escape(s)
    *
    * Escapes HTML tags and special characters in string `s`.
    *
    * @param {String} s String to be escaped
    * @return {String} Escaped string
    */
-  jst.html.escape = function(s) {
+  jstmpl.html.escape = function(s) {
     return s.
       replace(/&/g, '&amp;').
       replace(/</g, '&lt;').
@@ -151,14 +151,14 @@
   }
 
   /**
-   * ## jst.url
+   * ## jstmpl.url
    *
    * URL-related helper methods.
    */
-  jst.url = {};
+  jstmpl.url = {};
 
   /**
-   * ### jst.url.toQuery(parameters)
+   * ### jstmpl.url.toQuery(parameters)
    *
    * Converts a key-value pair of parameters into an URL query string. The
    * resulting string does not include the leading question mark `?`.
@@ -167,14 +167,14 @@
    *
    * @param {Object} parameters Key-value pair of URL parameters
    */
-  jst.url.toQuery = function(parameters) {
+  jstmpl.url.toQuery = function(parameters) {
     return Object.keys(parameters).map(function(key) {
       return key + '=' + encodeURIComponent(parameters[key]);
     }).join(';');
   }
 
   /**
-   * ## jst.settings
+   * ## jstmpl.settings
    *
    * Main template settings. Following are used:
    *
@@ -186,7 +186,7 @@
    *    can use it to make anything available to the template.
    *
    */
-  jst.settings = {
+  jstmpl.settings = {
     evaluate: /<%([\s\n\r\S]+?)%>/g,
     interpolate: /<%=([\s\n\r\S]+?)%>/g,
     escape: /<%-([\s\S]+?)%>/g,
@@ -203,11 +203,11 @@
     }
   };
 
-  jst.settings.globals.h = jst.html;
-  jst.settings.globals.u = jst.url;
+  jstmpl.settings.globals.h = jstmpl.html;
+  jstmpl.settings.globals.u = jstmpl.url;
 
   /**
-   * ## jst.render(str, [data, settings])
+   * ## jstmpl.render(str, [data, settings])
    *
    * Renders the template contained in `str` using `data`. `settings` can be
    * passed to override global settings.
@@ -224,7 +224,7 @@
    * @param {Object} settings Object containing overrides for global settings
    * @return {String} Rendered template or template function as string
    */
-  jst.render = function(str, data, settings) {
+  jstmpl.render = function(str, data, settings) {
     if (settings) {
       settings.__proto__ = this.settings;
     }
@@ -269,10 +269,10 @@
       
     var funcWrapped = function(data) {
       try {
-        return func.call(jst.settings.globals, data);
+        return func.call(jstmpl.settings.globals, data);
       } catch(e) {
         if (c.debug) {
-          console.log('[JST] ' + e + ' in:\n\n' +
+          console.log('[jstmpl] ' + e + ' in:\n\n' +
             func.toString() + '\n\n' + str);
           throw e;
         }
@@ -287,5 +287,5 @@
     }
   };
 
-  return jst;
+  return jstmpl;
 });

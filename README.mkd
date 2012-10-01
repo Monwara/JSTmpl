@@ -1,4 +1,4 @@
-# JST - JavaScript Templates
+# JSTmpl - JavaScript Templates
 
 Plain-text template engine with JavaScript support.
 
@@ -8,23 +8,23 @@ Forked from: bfa4fe8a4f / November 23, 2011
 
 ## Overview
 
-JST started off as a simple project of shamelessly ripping out
+JSTmpl started off as a simple project of shamelessly ripping out
 underscore.js' template functionality and converting it into an AMD module
 for use in frontends. Since then, quite a few things have changed, and
 functionality of the template engine has been somewhat expanded.
 
-JST now supports a handful of useful helper functions that makes combining
+JSTmpl now supports a handful of useful helper functions that makes combining
 JavaScript with your template much easier, and ads performance improvements
 like in-memory cache.
 
-The JST module itself has been converted to UMD format so it can be used
+The JSTmpl module itself has been converted to UMD format so it can be used
 both server- and client-side.
 
 ## TAGS
 
 Variable holding all enclosable tags
 
-## jst.html
+## jstmplmpl.html
 
 HTML-related helper methods.
 
@@ -36,7 +36,7 @@ The b and i tags are aliases for strong and em respectively.
 You can convert a sring into a tagged string by calling a method named
 after the tag:
 
-   jst.html.p('This is a paragraph');
+   jstmpl.html.p('This is a paragraph');
    // results in '<p>This is a paragraph</p>'
 
 You can also use arbitrary attributes:
@@ -45,35 +45,35 @@ You can also use arbitrary attributes:
    // results in '<a href="http://example.com">click here</a>'
 
 All HTML helper methods are available inside templates as well, prefixed
-by `g.h.`. For example `jst.html.a()` will be `g.h.a()` within 
+by `g.h.`. For example `jstmpl.html.a()` will be `g.h.a()` within 
 the templates.
 
 Other helper methods are documented in their own sections.
 
-### jst.html.enclose(s, t, attr)
+### jstmpl.html.enclose(s, t, attr)
 
 Enclose in HTML tags. `s` is the string to be enclosed in tags. `t` is the
 tag name, and `attr` is an object containing key-value mappings of HTML
 attributes.
 
 
-### jst.html.select(opts, attrs)
+### jstmpl.html.select(opts, attrs)
 
 Creates `<option>` elements for a select input and wraps them in
 `<select>` tags.
 
 array of label which would be also used as values.
 
-### jst.html.escape(s)
+### jstmpl.html.escape(s)
 
 Escapes HTML tags and special characters in string `s`.
 
 
-## jst.url
+## jstmpl.url
 
 URL-related helper methods.
 
-### jst.url.toQuery(parameters)
+### jstmpl.url.toQuery(parameters)
 
 Converts a key-value pair of parameters into an URL query string. The
 resulting string does not include the leading question mark `?`.
@@ -81,7 +81,7 @@ resulting string does not include the leading question mark `?`.
 It is assumed that keys are valid, and require no special treatment.
 
 
-## jst.settings
+## jstmpl.settings
 
 Main template settings. Following are used:
 
@@ -93,7 +93,7 @@ Main template settings. Following are used:
    can use it to make anything available to the template.
 
 
-## jst.render(str, [data, settings])
+## jstmpl.render(str, [data, settings])
 
 Renders the template contained in `str` using `data`. `settings` can be
 passed to override global settings.
