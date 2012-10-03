@@ -2,7 +2,7 @@
   "name": "jstmpl",
   "description": "Plain-text template engine with JavaScript support",
   "title": "JSTmpl",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "homepage": "https://github.com/Monwara/JSTmpl",
   "keywords": ["template", "view"],
   "author": "Monwara LLC <branko@monwara.com>",
@@ -12,7 +12,7 @@
       "email": "branko@monwara.com"
     }
   ],
-  "main": "jst.js",
+  "main": "jstmpl.js",
   "bugs": {
     "mail": "branko@monwara.com",
     "url": "https://github.com/Monwara/JSTmpl/issues"
