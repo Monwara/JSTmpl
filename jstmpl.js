@@ -60,13 +60,13 @@
    * You can convert a sring into a tagged string by calling a method named
    * after the tag:
    *
-   *    jstmpl.html.p('This is a paragraph');
-   *    // results in '<p>This is a paragraph</p>'
+   *     jstmpl.html.p('This is a paragraph');
+   *     // results in '<p>This is a paragraph</p>'
    *
    * You can also use arbitrary attributes:
    *
-   *    jqx.html.a('click here', {href: 'http://example.com'});
-   *    // results in '<a href="http://example.com">click here</a>'
+   *     jstmpl.html.a('click here', {href: 'http://example.com'});
+   *     // results in '<a href="http://example.com">click here</a>'
    *
    * All HTML helper methods are available inside templates as well, prefixed
    * by `g.h.`. For example `jstmpl.html.a()` will be `g.h.a()` within 
