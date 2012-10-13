@@ -225,9 +225,12 @@
    * @return {String} Rendered template or template function as string
    */
   jstmpl.render = function(str, data, settings) {
+    if (!str) { return ''; }
+
     if (settings) {
       settings.__proto__ = this.settings;
     }
+
     var c = settings || this.settings;
     var func;
 
@@ -284,6 +287,15 @@
       return funcWrapped(data); 
     } else {
       return funcWrapped;
+    }
+  };
+
+  jstmpl.__express = function(path, options, cb) {
+    var str = require('fs').readFileSync(path, 'utf-8');
+    try {
+      cb(null, jstmpl.render(str, options));
+    } catch(e) {
+      cb(e);
     }
   };
 
