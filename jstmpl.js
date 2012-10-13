@@ -7,7 +7,7 @@
  * Forked from: bfa4fe8a4f / November 23, 2011 
  *
  * @author Monwara LLC / Branko Vukelic <branko@brankovukelic.com>
- * @version 0.0.4
+ * @version 0.0.5
  */
  void(0);
 /**

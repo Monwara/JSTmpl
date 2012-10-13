@@ -2,7 +2,7 @@
   "name": "jstmpl",
   "description": "Plain-text template engine with JavaScript support",
   "title": "JSTmpl",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "homepage": "https://github.com/Monwara/JSTmpl",
   "keywords": ["template", "view"],
   "author": "Monwara LLC <branko@monwara.com>",
